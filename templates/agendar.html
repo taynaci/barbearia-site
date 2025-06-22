@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendamento</title>
+</head>
+<body>
+    <h1>Agendar Horário</h1>
+    <form method="POST">
+        <label>Nome: <input type="text" name="nome" required></label><br>
+        <label>Telefone: <input type="text" name="telefone" required></label><br>
+        <label>Data: <input type="date" name="data" required></label><br>
+        <label>Horário: <input type="time" name="horario" required></label><br>
+        <label>Serviço:
+            <select name="servico">
+                <option>Corte</option>
+                <option>Barba</option>
+                <option>Corte + Barba</option>
+            </select>
+        </label><br>
+        <button type="submit">Confirmar Agendamento</button>
+    </form>
+</body>
+</html>
