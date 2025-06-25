@@ -2,79 +2,120 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8" />
-    <title>Lista de Agendamentos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <title>Agendamentos - Barbearia</title>
     <style>
-        table {
-            border-collapse: collapse;
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00aaff;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
             margin: auto;
-            width: 90%;
-            background-color: #2c2c2c;
+            background-color: #1a1a1a;
+            padding: 20px;
             border-radius: 10px;
-            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
         th, td {
             padding: 12px 15px;
-            border-bottom: 1px solid #444;
-            color: #f0f0f0;
+            border-bottom: 1px solid #333;
+            text-align: center;
         }
 
         th {
-            background-color: #e0b054;
-            color: #1e1e1e;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            background-color: #00aaff;
+            color: #000;
+        }
+
+        tr:nth-child(even) {
+            background-color: #222;
         }
 
         a {
-            color: #e0b054;
+            color: #00aaff;
             text-decoration: none;
             font-weight: bold;
         }
 
         a:hover {
-            color: #c89a45;
+            color: #0077cc;
+        }
+
+        .alerta {
+            color: red;
+            font-weight: bold;
+        }
+
+        .top-links {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .top-links a {
+            margin: 0 10px;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #ccc;
         }
     </style>
 </head>
 <body>
-    <h1>Lista de Agendamentos</h1>
-    <a href="/agendar">Novo Agendamento</a><br><br>
+    <div class="container">
+        <h1>Lista de Agendamentos</h1>
 
-    {% if agendamentos %}
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Data</th>
-                <th>Horário</th>
-                <th>Serviço</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ag in agendamentos %}
-            <tr>
-                <td>{{ ag[1] }}</td>
-                <td>{{ ag[2] }}</td>
-                <td>{{ ag[3] }}</td>
-                <td>{{ ag[4] }}</td>
-                <td>{{ ag[5] }}</td>
-                <td>
-                    <a href="/editar/{{ ag[0] }}">Editar</a> |
-                    <a href="/excluir/{{ ag[0] }}" onclick="return confirm('Deseja realmente excluir este agendamento?')">Excluir</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>Nenhum agendamento registrado.</p>
-    {% endif %}
+        <div class="top-links">
+            <a href="/agendar">+ Novo Agendamento</a>
+            <a href="/">Voltar para Início</a>
+        </div>
 
-    <br />
-    <a href="/">Voltar para a página inicial</a>
+        {% if agendamentos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Serviço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ag in agendamentos %}
+                <tr>
+                    <td>{{ ag[1] }}</td>
+                    <td>{{ ag[2] }}</td>
+                    <td>{{ ag[3] }}</td>
+                    <td>{{ ag[4] }}</td>
+                    <td>{{ ag[5] }}</td>
+                    <td>
+                        <a href="/editar/{{ ag[0] }}">Editar</a> |
+                        <a href="/excluir/{{ ag[0] }}" class="alerta" onclick="return confirm('Deseja realmente excluir este agendamento?')">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-data">Nenhum agendamento registrado.</p>
+        {% endif %}
+    </div>
 </body>
 </html>
