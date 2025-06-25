@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bloqueios de Horários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <h1>Horários Bloqueados</h1>
+    <a href="/bloqueios/novo">Adicionar Novo Bloqueio</a>
+    <br /><br />
+    {% if bloqueios %}
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Motivo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in bloqueios %}
+            <tr>
+                <td>{{ b[1] }}</td>
+                <td>{{ b[2] }}</td>
+                <td>{{ b[3] }}</td>
+                <td><a href="/bloqueios/excluir/{{ b[0] }}" onclick="return confirm('Excluir este bloqueio?')">Excluir</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum bloqueio cadastrado.</p>
+    {% endif %}
+    <br />
+    <a href="/">Voltar para a página inicial</a>
+</body>
+</html>

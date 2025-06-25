@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Confirmação de Agendamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <h1>Agendamento Confirmado!</h1>
+    <p>Olá, <strong>{{ nome }}</strong>, seu agendamento foi registrado com sucesso.</p>
+
+    <ul>
+        <li><strong>Telefone:</strong> {{ telefone }}</li>
+        <li><strong>Data:</strong> {{ data }}</li>
+        <li><strong>Horário:</strong> {{ horario }}</li>
+        <li><strong>Serviço:</strong> {{ servico }}</li>
+    </ul>
+
+    <a href="/">Voltar para a página inicial</a>
+    <br>
+    <a href="/agendar">Agendar outro horário</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Editar Agendamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <h1>Editar Agendamento</h1>
+    <form method="POST">
+        <input type="text" name="nome" value="{{ agendamento[1] }}" placeholder="Nome" required /><br /><br />
+        <input type="text" name="telefone" value="{{ agendamento[2] }}" placeholder="Telefone" required /><br /><br />
+        <input type="date" name="data" value="{{ agendamento[3] }}" required /><br /><br />
+        <input type="time" name="horario" value="{{ agendamento[4] }}" required /><br /><br />
+        <input type="text" name="servico" value="{{ agendamento[5] }}" placeholder="Serviço" required /><br /><br />
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    <br />
+    <a href="/agendamentos">Voltar para lista de agendamentos</a>
+</body>
+</html>

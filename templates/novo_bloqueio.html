@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Novo Bloqueio de Horário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <h1>Adicionar Novo Bloqueio</h1>
+    <form method="POST">
+        <label for="data">Data:</label><br />
+        <input type="date" name="data" id="data" required /><br /><br />
+
+        <label for="horario">Horário:</label><br />
+        <select name="horario" id="horario" required>
+            <option value="" disabled selected>Selecione o horário</option>
+            {% for horario in horarios %}
+            <option value="{{ horario }}">{{ horario }}</option>
+            {% endfor %}
+        </select><br /><br />
+
+        <label for="motivo">Motivo:</label><br />
+        <input type="text" name="motivo" id="motivo" placeholder="Motivo do bloqueio" /><br /><br />
+
+        <button type="submit">Bloquear</button>
+    </form>
+    <br />
+    <a href="/bloqueios">Voltar</a>
+</body>
+</html>

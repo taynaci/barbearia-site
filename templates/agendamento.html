@@ -1,41 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Agendamentos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <title>Lista de Agendamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            width: 90%;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #444;
+            color: #f0f0f0;
+        }
+
+        th {
+            background-color: #e0b054;
+            color: #1e1e1e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        a {
+            color: #e0b054;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #c89a45;
+        }
+    </style>
 </head>
-<body class="container mt-5">
-    <h1 class="mb-4">Lista de Agendamentos</h1>
-    <a href="/" class="btn btn-secondary mb-3">Voltar para a página inicial</a>
+<body>
+    <h1>Lista de Agendamentos</h1>
+    <a href="/agendar">Novo Agendamento</a><br><br>
 
     {% if agendamentos %}
-    <table class="table table-bordered table-striped">
+    <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Data</th>
                 <th>Horário</th>
                 <th>Serviço</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            {% for agendamento in agendamentos %}
+            {% for ag in agendamentos %}
             <tr>
-                <td>{{ agendamento[0] }}</td>
-                <td>{{ agendamento[1] }}</td>
-                <td>{{ agendamento[2] }}</td>
-                <td>{{ agendamento[3] }}</td>
-                <td>{{ agendamento[4] }}</td>
-                <td>{{ agendamento[5] }}</td>
+                <td>{{ ag[1] }}</td>
+                <td>{{ ag[2] }}</td>
+                <td>{{ ag[3] }}</td>
+                <td>{{ ag[4] }}</td>
+                <td>{{ ag[5] }}</td>
+                <td>
+                    <a href="/editar/{{ ag[0] }}">Editar</a> |
+                    <a href="/excluir/{{ ag[0] }}" onclick="return confirm('Deseja realmente excluir este agendamento?')">Excluir</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-    <p>Nenhum agendamento encontrado.</p>
+    <p>Nenhum agendamento registrado.</p>
     {% endif %}
+
+    <br />
+    <a href="/">Voltar para a página inicial</a>
 </body>
 </html>

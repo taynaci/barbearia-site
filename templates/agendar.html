@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Agendamento</title>
+    <meta charset="UTF-8" />
+    <title>Agendar Horário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <h1>Agendar Horário</h1>
-    <form method="POST">
-        <label>Nome: <input type="text" name="nome" required></label><br>
-        <label>Telefone: <input type="text" name="telefone" required></label><br>
-        <label>Data: <input type="date" name="data" required></label><br>
-        <label>Horário: <input type="time" name="horario" required></label><br>
-        <label>Serviço:
-            <select name="servico">
-                <option>Corte</option>
-                <option>Barba</option>
-                <option>Corte + Barba</option>
-            </select>
-        </label><br>
-        <button type="submit">Confirmar Agendamento</button>
+    <h1>Agende seu horário</h1>
+
+    <!-- Form para escolher data e recarregar horários -->
+    <form method="GET" action="/agendar">
+        <label for="data">Escolha a data:</label><br />
+        <input type="date" id="data" name="data" value="{{ data }}" required onchange="this.form.submit()" />
     </form>
+
+    <br />
+
+    {% if horarios %}
+    <form method="POST" action="/agendar">
+        <input type="hidden" name="data" value="{{ data }}" />
+
+        <input type="text" name="nome" placeholder="Seu nome" required /><br />
+        <input type="text" name="telefone" placeholder="Telefone" required /><br />
+
+        <label for="horario">Horário disponível:</label><br />
+        <select name="horario" id="horario" required>
+            {% for horario in horarios %}
+                <option value="{{ horario }}">{{ horario }}</option>
+            {% endfor %}
+        </select><br /><br />
+
+        <label for="servico">Serviço:</label><br />
+        <select name="servico" id="servico" required>
+            <option value="" disabled selected>Selecione um serviço</option>
+            <option value="Corte de cabelo">Corte de cabelo</option>
+            <option value="Barba">Barba</option>
+            <option value="Corte + Barba">Corte + Barba</option>
+            <option value="Lavagem">Lavagem</option>
+            <option value="Aparar cabelo">Aparar cabelo</option>
+        </select><br /><br />
+
+        <button type="submit">Agendar</button>
+    </form>
+    {% else %}
+    <p>Não há horários disponíveis para essa data.</p>
+    {% endif %}
+
+    <br />
+    <a href="/">Voltar para a página inicial</a>
 </body>
 </html>
