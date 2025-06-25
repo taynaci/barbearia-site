@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Barbearia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Login do Barbeiro</h1>
+
+    {% if erro %}
+        <p style="color: red;">{{ erro }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <label>Usuário:</label><br>
+        <input type="text" name="username"><br><br>
+
+        <label>Senha:</label><br>
+        <input type="password" name="senha"><br><br>
+
+        <input type="submit" value="Entrar">
+    </form>
+
+    <br>
+    <a href="/">Voltar à página inicial</a>
+</body>
+</html>
